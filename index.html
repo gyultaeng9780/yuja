@@ -314,6 +314,14 @@ button{font-family:inherit}
 #house .now div{display:flex;align-items:center;gap:10px;font-size:12px;color:#bbb}
 #house .now i{width:8px;height:8px;border-radius:50%;flex-shrink:0;animation:hb 1.4s ease-in-out infinite}
 #house .now b{font-size:10px;letter-spacing:2px;color:#666;width:64px;flex-shrink:0}
+#house .hcw{position:relative;flex-shrink:0}
+#house #hff{position:absolute;top:10px;right:10px;height:26px;padding:0 10px;border-radius:6px;border:1px solid #333;background:#0c0c0cd9;color:#999;font:800 11px/1 'Anton',sans-serif;letter-spacing:1px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:border-color .2s,color .2s}
+#house #hff svg{width:13px;height:8px;fill:currentColor;display:block}
+#house #hff span{display:block;line-height:1;min-width:24px;text-align:center}
+#house #hff:hover{border-color:var(--y);color:#fff}
+#house #hff.on{border-color:var(--y);color:var(--y);background:#1a1500e6}
+#house #hff.on svg{animation:ffb .6s steps(2) infinite}
+@keyframes ffb{50%{opacity:.35}}
 #house .acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 #house .acts button{height:38px;border-radius:12px;border:1px solid #2a2a2a;background:#0c0c0c;color:#ccc;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
 #house .acts button:hover{border-color:var(--y);color:#fff}
@@ -1017,7 +1025,7 @@ html.mob #lb.idc .x{top:calc(50% - 134px + 6px)!important;right:calc(50% - 180px
    <div class="log" id="hlog"></div>
   </div>
   <div class="card side ga">
-   <canvas id="hc" width="444" height="262"></canvas>
+   <div class="hcw"><canvas id="hc" width="444" height="262"></canvas><button id="hff" title="시간 빨리 감기"><svg viewBox="0 0 16 10"><path d="M0 0l7 5-7 5zM8 0l7 5-7 5z"/></svg><span>X1</span></button></div>
    <div class="pad">
     <div class="aff"><small>애정도</small><b id="afv">0</b><div class="lv"><i id="afb"></i></div><em id="aflv">LV.1</em></div>
     <div class="st" id="sts"></div>
@@ -1251,7 +1259,7 @@ DIARY.forEach(x=>{const d=new Date(x.d),e=el('div','ent');e.style.color=C[x.who]
   {who:'A',p:['kit'],d:'냉장고 탐색',tg:'hungry',m:['유설하가 커다란 냉장고 문을 열어 둔 채 한참 서 있다.','냉장고 맨 아래 칸에서 참치캔을 찾아낸 유설하. 소리 없이 하나를 챙긴다.'],e:{ah:18}},
   {who:'A',p:['kit'],d:'냉장고 앞에서 정지',m:'냉장고 문을 연 유설하가 오이를 발견하고 조용히 문을 닫는다.',e:{am:-3}},
   {who:'A',p:['sofaL'],d:'과제 영상 편집',m:['유설하가 노트북으로 과제 영상을 편집한다. 효과음을 넣을 때마다 귀가 쫑긋 선다.','마감 세 시간 전. 유설하가 과제 파일을 연다. 아직 아무것도 안 했다.'],e:{am:-2}},
-  {who:'A',p:['sofaL'],d:'충전기 찾는 중',m:['유설하가 휴대폰을 보다가 멈칫한다. 배터리 2%. 충전기를 찾아 집 안을 어슬렁거린다.','“아…배터리…죽었다…” 유설하가 꺼진 휴대폰을 들고 소파에 쓰러진다.']},
+  {who:'A',p:['sofaL'],d:'충전기 찾는 중',m:['유설하가 휴대폰을 보다가 멈칫한다. 배터리 2%. 충전기를 찾아 집 안을 어슬렁거린다.','휴대폰이 꺼졌다. 유설하가 까만 화면을 한참 보다가 소파에 쓰러진다.']},
   {who:'A',p:['rug'],d:'디카 사진 정리',m:['유설하가 디카에 쌓인 사진을 넘겨 본다. 절반이 벤자민 뒷모습이다.','유설하가 디카 화면을 보며 몰래 웃는다. 흔들린 사진도 지우지 않는다.'],e:{am:5}},
   {who:'A',p:['win'],d:'어항 멍',m:'유설하가 어항 앞에 쪼그려 앉아 물고기를 눈으로 쫓는다. 한참 동안 움직이지 않는다.',e:{am:5}},
   {who:'A',p:['sofaL'],d:'담요 굴',m:['유설하가 소파에서 담요를 머리끝까지 뒤집어쓴다. 담요 밖으로 귀 두 개만 솟아 있다.','유설하가 담요를 둘둘 말고 소파 구석에 끼어 앉는다. 좁은 데가 편하다고 한다.'],e:{am:6}},
@@ -1280,7 +1288,7 @@ DIARY.forEach(x=>{const d=new Date(x.d),e=el('div','ent');e.style.color=C[x.who]
   {who:'B',p:[null,'desk'],d:'셋리스트 짜기',m:'벤자민이 다음 공연 셋리스트를 짠다. 설하가 좋아하는 곡을 슬쩍 마지막에 넣는다.',e:{bm:5}},
   {who:'B',p:[null,'sofaR'],d:'하품',m:['벤자민이 하품을 한다. 입이 귀까지 벌어진다. 지나가던 유설하가 그 안을 들여다본다.','택배 기사가 벨을 눌렀다. 문을 연 벤자민이 하품을 한다. 기사가 한 발짝 물러선다.']},
   {who:'B',p:[null,'kit'],d:'꼬리 부딪힘',m:'벤자민이 문틀에 꼬리를 세게 부딪혔다. 아무렇지 않게 지나간다. 놀란 건 소리를 들은 유설하뿐이다.'},
-  {who:'B',p:[null,'sofaR'],d:'마이웨이',m:['벤자민이 설거지를 미뤄 두고 소파에서 기타 줄만 튕긴다. “이따 할게.” 이따는 오지 않는다.','벤자민이 아무 말 없이 거실 조명을 자기 취향대로 바꿔 놓는다.']},
+  {who:'B',p:[null,'sofaR'],d:'마이웨이',m:['벤자민이 설거지를 미뤄 두고 소파에서 기타 줄만 튕긴다. 싱크대는 내일의 벤자민에게 넘어간다.','벤자민이 아무 말 없이 거실 조명을 자기 취향대로 바꿔 놓는다.']},
   {who:'B',p:[null,'sofaR'],d:'셀카 테러',m:'벤자민이 유설하 디카로 셀카를 서른 장 찍어 둔다. 전부 같은 표정이다.'},
   /* 둘이 함께 (애정도 +1 / -1) */
   {who:'AB',p:['kit','kit'],d:'오뎅탕에 소주',h:[18,23],m:'오뎅탕이 끓는다. 벤자민이 소주잔 두 개를 꺼낸다. 오랜만에 같이 마시는 술.',a:1,e:{ah:15,bh:15}},
@@ -1302,26 +1310,26 @@ DIARY.forEach(x=>{const d=new Date(x.d),e=el('div','ent');e.style.color=C[x.who]
   {who:'AB',p:['sofaL','sofaR'],d:'게임 대결',m:'둘이 레이싱 게임을 한다. 유설하가 질 때마다 꼬리가 바닥을 탁탁 친다.',a:1},
   {who:'AB',p:['win','win'],d:'빗소리 듣기',m:'창밖에 비가 온다. 둘은 아무 말 없이 통창 앞에 앉아 빗소리를 듣는다.',a:1,e:{am:5,bm:5}},
   {who:'AB',p:['kit','kit'],d:'샐러드 사건',m:'벤자민이 샐러드에 오이를 넣었다. 유설하가 접시를 조용히 밀어낸다.',a:-1},
-  {who:'AB',p:['kit','kit'],d:'아침 작업',h:[7,11],m:'“우리 어디서 만난 적 있었나?” 아침부터 능글맞게 구는 벤자민. 유설하가 커피를 건네며 솔직하게 말한다. “매일 봐.”',a:1},
+  {who:'AB',p:['kit','kit'],d:'아침 작업',h:[7,11],m:'아침부터 능글맞게 구는 벤자민. 유설하는 대꾸 없이 커피만 건넨다.',a:1},
   {who:'AB',p:['kit','kit'],d:'술 대결',h:[19,24],m:'벤자민이 소주 세 병을 비우고도 멀쩡하다. 유설하는 두 잔 만에 귀 끝까지 빨개졌다.',a:1,e:{bm:8}},
-  {who:'AB',p:['sofaL','sofaR'],d:'가사 품평',m:'벤자민이 새로 쓴 가사를 보여 준다. 유설하가 솔직하게 말한다. “이 줄은 별로야.” 벤자민이 그 줄을 지운다.',a:1},
+  {who:'AB',p:['sofaL','sofaR'],d:'가사 품평',m:'벤자민이 새로 쓴 가사를 보여 준다. 유설하가 한 줄을 손가락으로 짚는다. 벤자민이 그 줄을 지운다.',a:1},
   {who:'AB',p:['sofaL','sofaR'],d:'위로하기',tg:'comfort',m:'기분이 가라앉은 유설하 옆에 벤자민이 말없이 앉는다. 큰 손이 머리 위에 잠깐 얹힌다. 유설하가 아무 말 없이 골골거린다.',a:1,e:{am:15}},
   /* 밖에 다녀오기 — o:[몇 칸, 돌아오는 문장] */
   {who:'A',p:['out'],d:'외출 · 대학교',h:[9,17],wd:1,o:[120,['유설하가 대학교에서 돌아왔다. 과제가 하나 더 늘었다며 소파에 쓰러진다.','수업을 마친 유설하가 돌아온다. 동기들이랑 찍은 사진을 벤자민에게 보여 준다.'],['강의실 맨 뒷줄. 유설하가 교수님 몰래 휴대폰 배터리를 확인한다. 4%.','유설하가 학교 편집실에서 과제 영상을 렌더링한다. 진행률이 멈춰 있다.']],m:['유설하가 노트북 가방을 메고 대학교 수업에 간다.','유설하가 1교시를 놓칠까 봐 뛰어나간다. 디카는 잊지 않고 챙긴다.'],e:{am:-3}},
-  {who:'B',p:[null,'out'],d:'외출 · 대학교',h:[10,19],wd:1,o:[110,['합주를 마친 벤자민이 기타 케이스를 메고 들어온다.','벤자민이 학교에서 돌아온다. 졸업 공연 이야기를 하다가 금방 소파에 늘어진다.'],['합주실. 벤자민이 솔로 파트에서 또 즉흥으로 바꾼다. 드러머가 한숨을 쉰다.','벤자민이 학교 벤치에 앉아 유설하에게 메시지를 보낸다. “뭐 해.”']],m:['벤자민이 기타 케이스를 메고 학교 합주실에 간다.','4학년 졸업 공연 회의. 벤자민이 느릿느릿 학교로 나선다.'],e:{bm:-2}},
+  {who:'B',p:[null,'out'],d:'외출 · 대학교',h:[10,19],wd:1,o:[110,['합주를 마친 벤자민이 기타 케이스를 메고 들어온다.','벤자민이 학교에서 돌아온다. 졸업 공연 이야기를 하다가 금방 소파에 늘어진다.'],['합주실. 벤자민이 솔로 파트에서 또 즉흥으로 바꾼다. 드러머가 한숨을 쉰다.','벤자민이 학교 벤치에 앉아 유설하에게 짧은 메시지를 보낸다.']],m:['벤자민이 기타 케이스를 메고 학교 합주실에 간다.','4학년 졸업 공연 회의. 벤자민이 느릿느릿 학교로 나선다.'],e:{bm:-2}},
   {who:'A',p:['out'],d:'외출 · 편의점',m:'유설하가 슬리퍼를 끌고 편의점에 간다.',o:[8,['편의점에서 돌아온 유설하의 봉투 안에 참치마요 삼각김밥 두 개와 벤자민 몫 맥주 한 캔.','유설하가 편의점에서 보조배터리를 사 왔다. 이번 달에만 세 번째다.']],e:{ah:10}},
   {who:'B',p:[null,'out'],d:'외출 · 편의점',m:'벤자민이 맥주가 떨어졌다며 편의점에 간다.',o:[8,['벤자민이 편의점에서 맥주 네 캔과 유설하가 좋아하는 젤리를 사 왔다. 끈적한 건 빼고.','편의점에서 돌아온 벤자민이 1+1 아이스크림 하나를 유설하 손에 쥐여 준다.']],e:{bh:6}},
   {who:'B',p:[null,'out'],d:'외출 · 마트',h:[10,22],m:'벤자민이 장바구니를 들고 마트에 간다.',o:[26,['마트에서 돌아온 벤자민. 장바구니에 참치캔이 가득하고 오이는 없다.','벤자민이 마트에서 붕어빵 봉투까지 들고 돌아온다.']],e:{bh:10,ah:10}},
   {who:'AB',p:['out','out'],d:'마트',h:[10,22],m:'둘이 같이 마트에 간다. 카트는 벤자민이 민다.',o:[30,['마트에서 돌아온 두 사람. 장바구니에는 참치캔 다섯 개, 오이는 없다.','둘이 마트에서 돌아온다. 시식 코너를 전부 돌고 온 벤자민이 제일 배부르다.']],a:1,e:{ah:12,bh:12}},
   {who:'AB',p:['out','out'],d:'영화관',h:[13,23],m:['둘이 영화관에 간다. 유설하가 고른 건 공포 영화다.','둘이 심야 영화를 보러 나간다. 팝콘은 큰 거 하나.'],o:[110,['영화관에서 돌아온 두 사람. 무서운 장면마다 팔을 잡은 건 벤자민 쪽이었다.','영화를 보고 온 유설하가 결말 이야기를 멈추지 않는다. 벤자민은 중간에 잤다.'],['영화관 안. 팝콘은 벌써 절반이 비었다.','상영관 불이 꺼진다. 유설하의 귀가 스크린 쪽으로 쫑긋 선다.']],a:1,e:{am:10,bm:6}},
-  {who:'AB',p:['out','out'],d:'아쿠아리움',h:[10,19],m:['둘이 아쿠아리움에 간다. 유설하가 디카부터 챙긴다.','주말 아쿠아리움 데이트. 벤자민이 표를 미리 사 두었다.'],o:[150,['아쿠아리움에서 돌아온 두 사람. 유설하의 디카에는 물고기 사진 반, 벤자민 사진 반.','아쿠아리움 악어관 앞에서 벤자민이 “친척”이라고 했다며 유설하가 아직도 웃는다.'],['아쿠아리움 수조 앞. 유설하가 디카를 들고 한참 움직이지 않는다.','악어관 앞에서 벤자민이 걸음을 멈춘다. 유리 너머 악어와 눈이 마주쳤다.','해파리관의 파란 불빛 아래서 둘이 셀카를 찍는다.']],a:1,e:{am:12,bm:8}},
+  {who:'AB',p:['out','out'],d:'아쿠아리움',h:[10,19],m:['둘이 아쿠아리움에 간다. 유설하가 디카부터 챙긴다.','주말 아쿠아리움 데이트. 벤자민이 표를 미리 사 두었다.'],o:[150,['아쿠아리움에서 돌아온 두 사람. 유설하의 디카에는 물고기 사진 반, 벤자민 사진 반.','아쿠아리움 악어관 앞에서 찍은 사진을 넘겨 보며 유설하가 아직도 웃는다.'],['아쿠아리움 수조 앞. 유설하가 디카를 들고 한참 움직이지 않는다.','악어관 앞에서 벤자민이 걸음을 멈춘다. 유리 너머 악어와 눈이 마주쳤다.','해파리관의 파란 불빛 아래서 둘이 셀카를 찍는다.']],a:1,e:{am:12,bm:8}},
   /* 버튼 뒤에 이어지는 장면 */
-  {who:'A',p:['sofaL'],d:'배불러서 뻗음',tg:'afterfood',m:['간식을 다 먹은 유설하가 소파에 대자로 뻗는다. “더는 못 먹어.”','배부른 유설하가 벤자민 무릎을 베고 눕는다. 낮게 골골거리는 소리가 들린다.'],e:{am:5}},
+  {who:'A',p:['sofaL'],d:'배불러서 뻗음',tg:'afterfood',m:['간식을 다 먹은 유설하가 소파에 대자로 뻗는다. 배를 두드리며 눈을 감는다.','배부른 유설하가 벤자민 무릎을 베고 눕는다. 낮게 골골거리는 소리가 들린다.'],e:{am:5}},
   {who:'A',p:['sofaL'],d:'놀다 지침',tg:'afterplay',m:['한참 놀던 유설하가 인형을 끌어안은 채 소파에서 잠든다.','유설하가 새 인형을 침대 머리맡에 세워 둔다. 벤자민 기타 옆자리다.'],e:{am:4}},
   {who:'A',p:['sofaL'],d:'흥얼거리기',tg:'aftersong',m:'유설하가 아까 그 노래를 흥얼거린다. 음은 다 틀렸다. 벤자민이 작업실에서 몰래 웃는다.',e:{am:5}}];
  const SPX={bed:22,tower:47,sofaL:68,sofaR:86,win:74,desk:104,kit:136,rug:76};
  const REACT={snack:{m:['식탁 위에 간식이 놓였다.',['유설하가 귀를 세우고 식탁으로 달려온다.','유설하가 어디선가 나타나 식탁 의자를 끌어당긴다.','포장 뜯는 소리에 유설하의 귀가 먼저 돌아간다. 몸은 그다음에 온다.'],'벤자민이 하나를 집어 먹고 나머지를 유설하 쪽으로 민다.'],f:S=>{S.a.hun+=25;S.b.hun+=25;S.fed=4;S.must='afterfood';S.doA='간식 먹는 중';S.pA='kit'}},
-  toy:{m:['벤자민이 인형뽑기에서 뽑아 온 인형을 내민다.','유설하의 동공이 커진다. 아무렇지 않은 척 받는데 꼬리가 바짝 선다.',['유설하가 인형을 이리저리 돌려 보다가 디카로 찍는다.','“…뽑는 데 얼마 썼어?” 묻는 유설하의 귀가 쫑긋하다.']],f:S=>{S.a.mood+=15;S.played=4;S.must='afterplay';S.doA='새 인형 구경';S.pA='sofaL'}},
+  toy:{m:['벤자민이 인형뽑기에서 뽑아 온 인형을 내민다.','유설하의 동공이 커진다. 아무렇지 않은 척 받는데 꼬리가 바짝 선다.',['유설하가 인형을 이리저리 돌려 보다가 디카로 찍는다.','유설하가 인형과 벤자민을 번갈아 본다. 귀가 쫑긋하다.']],f:S=>{S.a.mood+=15;S.played=4;S.must='afterplay';S.doA='새 인형 구경';S.pA='sofaL'}},
   song:{m:['신청곡 쪽지가 도착했다.','벤자민이 작업실 벽에서 기타를 내려 들고 한 곡 부른다.','유설하가 문틈으로 귀만 내밀고 듣는다.'],f:S=>{S.b.mood+=12;S.a.mood+=6;S.aff+=1;S.sung=4;S.must='aftersong';S.doB='신청곡 연주';S.pB='desk'},aff:1},
   off:{m:['딸깍, 불이 꺼졌다.'],f:S=>{S.forceOff=1;S.forceOn=0}},
   on:{m:['딸깍, 불이 켜졌다.'],f:S=>{S.forceOn=1;S.forceOff=0}}};
@@ -1415,14 +1423,14 @@ DIARY.forEach(x=>{const d=new Date(x.d),e=el('div','ent');e.style.color=C[x.who]
  }
  const loop=()=>{requestAnimationFrame(loop);if($('#house').classList.contains('on'))draw()};
  /* ===== 나만의 방: 처음 들어온 순간부터 시간에 따라 흘러가고, 버튼은 이후 장면에 영향 ===== */
- const SL=75000;let EP=+localStorage.getItem('house_ep2')||0;if(!EP){EP=Date.now();try{localStorage.setItem('house_ep2',EP)}catch(e){}}
+ const SL=75000;let FF=+localStorage.getItem('house_ff')||0,SPD=1;const NOW=()=>Date.now()+FF;let EP=+localStorage.getItem('house_ep2')||0;if(!EP){EP=Date.now();try{localStorage.setItem('house_ep2',EP)}catch(e){}}
  const SEED=EP%100000;
  const kh=t=>new Date(t).getHours(),khm=t=>{const d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
  const nightAt=t=>{const h=kh(t);return h>=23||h<7};
  const rng=n=>{let a=(n*2654435761+SEED*97)>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}};
  let ACTS=[];try{ACTS=JSON.parse(localStorage.getItem('house_acts2')||'[]')}catch(e){}
  const inH=(h,r)=>!r||(r[0]<r[1]?h>=r[0]&&h<r[1]:h>=r[0]||h<r[1]);
- function weight(ev,S,h,t){if(!inH(h,ev.h))return 0;if(ev.wd){const d=new Date(t).getDay();if(d===0||d===6)return 0}if((ev.who!=='B'&&S.awayA)||(ev.who!=='A'&&S.awayB))return 0;if(S.recent.includes(ev))return 0;let w=1;
+ function weight(ev,S,h,t){if(!inH(h,ev.h))return 0;if(ev.wd){const d=new Date(t).getDay();if(d===0||d===6)return 0}if((ev.who!=='B'&&S.awayA)||(ev.who!=='A'&&S.awayB))return 0;if(S.recent.includes(ev))return 0;if(S.fresh&&!S.fresh(ev))return 0;if(ev.o&&S.outK){const dk=ev.d.replace('외출 · ','');if(S.outK[dk]!=null&&S.k-S.outK[dk]<700)return 0}let w=1;
   if(ev.tg==='hungry'){const hu=ev.who==='A'?S.a.hun:S.b.hun;w=S.fed>0?0:hu<35?5:hu<60?1.5:.3}
   if(ev.tg==='afterfood')w=S.fed>0?5:0;if(ev.tg==='afterplay')w=S.played>0?5:0;if(ev.tg==='aftersong')w=S.sung>0?5:0;
   if(ev.tg==='nap'&&S.fed>0)w*=2.5;if(ev.tg==='comfort')w=(S.a.mood<45?4:0);
@@ -1430,49 +1438,51 @@ DIARY.forEach(x=>{const d=new Date(x.d),e=el('div','ent');e.style.color=C[x.who]
   if(ev.o)w*=ev.who==='AB'?2.5:.3;
   return w}
  function simulate(now){const S={aff:0,a:{hun:80,mood:80},b:{hun:80,mood:80},doA:'집에 있는 중',doB:'집에 있는 중',pA:'sofaL',pB:'desk',forceOff:0,forceOn:0,dark:0,fed:0,played:0,sung:0,awayA:null,awayB:null,recent:[],log:[]};
-  const L=o=>{S.log.push(o);if(S.log.length>70)S.log.shift()};
+  const L=o=>{S.log.push(o);if(S.log.length>70)S.log.shift()};const UM=new Map();let NK=0;const pu=(r,arr)=>{if(!Array.isArray(arr))arr=[arr];const fr=arr.filter(m=>!UM.has(m)||NK-UM.get(m)>1400);const pool=fr.length?fr:[arr.slice().sort((x,y)=>(UM.get(x)||0)-(UM.get(y)||0))[0]];const m=pool[Math.floor(r()*pool.length)];UM.set(m,NK);return m};S.fresh=ev=>{const arr=Array.isArray(ev.m)?ev.m:[ev.m];return arr.some(m=>!UM.has(m)||NK-UM.get(m)>1400)};
   L({id:'s',tm:khm(EP),m:'— '+INFO.aName+' & '+INFO.bName+'의 집 —',sys:1,gap:1});
   L({id:'s2',tm:khm(EP),m:'넓고 깔끔한 집. 벤치에서 시작된 둘이 함께 사는 곳. 통창 거실, 방음 작업실, 큰 어항, 그리고 둘.'});
   const cl=()=>['a','b'].forEach(k=>{S[k].hun=Math.max(0,Math.min(100,S[k].hun));S[k].mood=Math.max(0,Math.min(100,S[k].mood))});
   const acts=ACTS.filter(x=>x.t>=EP&&x.t<=now).sort((x,y)=>x.t-y.t);let ai=0;
-  const doAct=x=>{const R=REACT[x.type];if(!R)return;const r=rng(x.t%1e9);if(((x.type==='snack'||x.type==='toy')&&S.awayA)||(x.type==='song'&&S.awayB)){L({id:'a'+x.t+'w',tm:khm(x.t),m:x.type==='song'?'신청곡 쪽지를 작업실 문에 붙여 둔다. 벤자민은 아직 밖에 있다.':x.type==='snack'?'유설하는 아직 밖에 있다. 간식을 식탁 위에 올려 둔다.':'유설하는 아직 밖에 있다. 선물은 침대 위에 올려 둔다.',gap:1});if(x.type==='snack'){S.a.hun+=10;S.b.hun+=15;cl()}return}if(x.type==='snack'&&S.dark===1){L({id:'a'+x.t+'z',tm:khm(x.t),m:'자다 깬 유설하가 냄새를 맡고 비틀비틀 식탁으로 온다.',gap:1})}R.f(S);cl();if(x.type==='on'||x.type==='off')S.dark=-1;R.m.forEach((m,i)=>L({id:'a'+x.t+'_'+i,tm:khm(x.t),m:pk(r,m),gap:i===0}));if(R.aff)L({id:'a'+x.t+'f',tm:khm(x.t),m:'애정도 +1',sys:1,gap:1})};
+  const doAct=x=>{const R=REACT[x.type];if(!R)return;const r=rng(x.t%1e9);if(((x.type==='snack'||x.type==='toy')&&S.awayA)||(x.type==='song'&&S.awayB)){L({id:'a'+x.t+'w',tm:khm(x.t),m:x.type==='song'?'신청곡 쪽지를 작업실 문에 붙여 둔다. 벤자민은 아직 밖에 있다.':x.type==='snack'?'유설하는 아직 밖에 있다. 간식을 식탁 위에 올려 둔다.':'유설하는 아직 밖에 있다. 선물은 침대 위에 올려 둔다.',gap:1});if(x.type==='snack'){S.a.hun+=10;S.b.hun+=15;cl()}return}if(x.type==='snack'&&S.dark===1){L({id:'a'+x.t+'z',tm:khm(x.t),m:'자다 깬 유설하가 냄새를 맡고 비틀비틀 식탁으로 온다.',gap:1})}R.f(S);cl();if(x.type==='on'||x.type==='off')S.dark=-1;R.m.forEach((m,i)=>L({id:'a'+x.t+'_'+i,tm:khm(x.t),m:pu(r,m),gap:i===0}));if(R.aff)L({id:'a'+x.t+'f',tm:khm(x.t),m:'애정도 +1',sys:1,gap:1})};
   const N=Math.floor((now-EP)/SL);let wasNight=nightAt(EP);
-  for(let k=1;k<=N;k++){const t=EP+k*SL;while(ai<acts.length&&acts[ai].t<=t)doAct(acts[ai++]);
+  S.outK={};for(let k=1;k<=N;k++){NK=k;S.k=k;const t=EP+k*SL;while(ai<acts.length&&acts[ai].t<=t)doAct(acts[ai++]);
    ['a','b'].forEach(q=>{S[q].hun-=.45;S[q].mood-=.25});cl();S.fed=Math.max(0,S.fed-1);S.played=Math.max(0,S.played-1);S.sung=Math.max(0,S.sung-1);
    const nt=nightAt(t);if(nt!==wasNight){S.forceOff=0;S.forceOn=0;wasNight=nt}
    const dark=(nt&&!S.forceOn)||S.forceOff;
-   if(dark){S.awayA=S.awayB=null;if(S.dark!==1){S.dark=1;S.doA=S.doB='쿨쿨 자는 중';S.pA=S.pB='bed';L({id:'k'+k,tm:khm(t),m:pk(rng(k),['불이 꺼지자 둘은 침대로 들어간다. 유설하가 벤자민 품으로 파고든다.','침대 위, 유설하가 벤자민 팔을 베고 눕는다. 금방 골골 소리가 난다.','둘은 불을 끄고 나란히 눕는다. 벤자민이 먼저 잠들고, 유설하가 그 얼굴을 한참 본다.']),gap:1})}continue}
-   if(S.dark===1){S.dark=0;S.doA=S.doB='집에 있는 중';S.pA='bed';S.pB='kit';L({id:'k'+k,tm:khm(t),m:pk(rng(k),['둘이 부스스 일어난다.','알람이 세 번 울리고 나서야 벤자민이 일어난다. 유설하는 이불 속에서 나오지 않는다.']),gap:1});continue}
+   if(dark){S.awayA=S.awayB=null;if(S.dark!==1){S.dark=1;S.doA=S.doB='쿨쿨 자는 중';S.pA=S.pB='bed';L({id:'k'+k,tm:khm(t),m:pu(rng(k),['불이 꺼지자 둘은 침대로 들어간다. 유설하가 벤자민 품으로 파고든다.','침대 위, 유설하가 벤자민 팔을 베고 눕는다. 금방 골골 소리가 난다.','둘은 불을 끄고 나란히 눕는다. 벤자민이 먼저 잠들고, 유설하가 그 얼굴을 한참 본다.']),gap:1})}continue}
+   if(S.dark===1){S.dark=0;S.doA=S.doB='집에 있는 중';S.pA='bed';S.pB='kit';L({id:'k'+k,tm:khm(t),m:pu(rng(k),['둘이 부스스 일어난다.','알람이 세 번 울리고 나서야 벤자민이 일어난다. 유설하는 이불 속에서 나오지 않는다.']),gap:1});continue}
    S.dark=0;const r=rng(k);
-   let back=0;['A','B'].forEach(q=>{const w=S['away'+q];if(w&&k>=w.u){S['away'+q]=null;if(!w.shared||q==='A'){if(w.shared)L({id:'b'+k+'l',tm:khm(t),m:'현관문이 열리고, 딸깍 불이 켜진다.',gap:1});L({id:'b'+k+q,tm:khm(t),m:pk(r,w.back),gap:1});back=1}if(q==='A'){S.doA='집에 있는 중';S.pA='sofaL'}else{S.doB='집에 있는 중';S.pB='sofaR'}}});
-   ['A','B'].forEach(q=>{const w=S['away'+q];if(w&&w.mid&&k>=w.mid&&!(w.shared&&q==='B')){w.mid=0;L({id:'m'+k+q,tm:khm(t),m:pk(r,w.midm),gap:1});back=1}});
+   let back=0;['A','B'].forEach(q=>{const w=S['away'+q];if(w&&k>=w.u){S['away'+q]=null;if(!w.shared||q==='A'){if(w.shared)L({id:'b'+k+'l',tm:khm(t),m:pu(r,['현관문이 열리고, 딸깍 불이 켜진다.','도어락 소리와 함께 거실 불이 다시 켜진다.','불 꺼진 집에 둘이 돌아온다. 딸깍, 불이 켜진다.']),gap:1});L({id:'b'+k+q,tm:khm(t),m:pu(r,w.back),gap:1});back=1}if(q==='A'){S.doA='집에 있는 중';S.pA='sofaL'}else{S.doB='집에 있는 중';S.pB='sofaR'}}});
+   ['A','B'].forEach(q=>{const w=S['away'+q];if(w&&w.mid&&k>=w.mid&&!(w.shared&&q==='B')){w.mid=0;L({id:'m'+k+q,tm:khm(t),m:pu(r,w.midm),gap:1});back=1}});
    if(back){cl();continue}
    if(S.awayA&&S.awayB)continue;
    if(S.must&&S.awayA)S.must=null;if(!S.must&&r()<.28)continue;
    const h=kh(t),ws=EV.map(ev=>S.must?(ev.tg===S.must&&!(S.awayA)?1:0):weight(ev,S,h,t)),sum=ws.reduce((a,b)=>a+b,0);if(!sum)continue;let x=r()*sum,ev=EV[0];for(let i=0;i<EV.length;i++){x-=ws[i];if(x<=0){ev=EV[i];break}}
-   S.must=null;S.recent.push(ev);if(S.recent.length>6)S.recent.shift();
+   S.must=null;S.recent.push(ev);if(S.recent.length>14)S.recent.shift();
    const E=ev.e||{};S.a.hun+=E.ah||0;S.a.mood+=E.am||0;S.b.hun+=E.bh||0;S.b.mood+=E.bm||0;
    if(ev.who!=='B'){S.doA=(ev.who==='AB'?'함께 · ':'')+ev.d;S.pA=ev.p[0]}if(ev.who!=='A'){S.doB=(ev.who==='AB'?'함께 · ':'')+ev.d;S.pB=ev.p[1]}
-   L({id:'k'+k,tm:khm(t),m:pk(r,ev.m),gap:1});
-   if(ev.o&&ev.who==='AB')L({id:'k'+k+'o',tm:khm(t),m:'딸깍, 둘이 집 안 불을 모두 끄고 현관문을 닫는다.',gap:1});if(ev.o){const u=k+ev.o[0],mid=ev.o[2]?Math.floor(k+ev.o[0]/2):0;if(ev.who!=='B')S.awayA={u,mid,midm:ev.o[2],back:ev.o[1],shared:ev.who==='AB'};if(ev.who!=='A')S.awayB={u,mid,midm:ev.o[2],back:ev.o[1],shared:ev.who==='AB'}}
+   L({id:'k'+k,tm:khm(t),m:pu(r,ev.m),gap:1});
+   if(ev.o&&ev.who==='AB')L({id:'k'+k+'o',tm:khm(t),m:pu(r,['딸깍, 둘이 집 안 불을 모두 끄고 현관문을 닫는다.','거실 불이 꺼지고, 현관문 잠기는 소리가 난다.','둘이 신발을 신고 나간다. 집 안 불은 모두 꺼졌다.']),gap:1});if(ev.o){S.outK[ev.d.replace('외출 · ','')]=k;const u=k+ev.o[0],mid=ev.o[2]?Math.floor(k+ev.o[0]/2):0;if(ev.who!=='B')S.awayA={u,mid,midm:ev.o[2],back:ev.o[1],shared:ev.who==='AB'};if(ev.who!=='A')S.awayB={u,mid,midm:ev.o[2],back:ev.o[1],shared:ev.who==='AB'}}
    if(ev.a){S.aff=Math.max(0,S.aff+ev.a);const dm=ev.a>0?6:-5;S.a.mood+=dm;S.b.mood+=dm;L({id:'k'+k+'f',tm:khm(t),m:ev.a>0?'애정도 +1':'애정도 -1',sys:1,gap:1})}
    if(ev.tg==='afterfood')S.fed=0;if(ev.tg==='afterplay')S.played=0;if(ev.tg==='aftersong')S.sung=0;cl()}
   while(ai<acts.length)doAct(acts[ai++]);
   S.dark=(nightAt(now)&&!S.forceOn)||S.forceOff;return S}
  let SHOWN=new Set();
- function apply(anim){const S=simulate(Date.now());H.aff=S.aff;const bothOut=!!(S.awayA&&S.awayB);H.out=bothOut;H.light=(S.dark||bothOut)?0:1;CH.A.st=S.a;CH.B.st=S.b;doing.A=S.doA;doing.B=S.doB;sleeping=S.dark?1:0;
+ function apply(anim){const S=simulate(NOW());H.aff=S.aff;const bothOut=!!(S.awayA&&S.awayB);H.out=bothOut;H.light=(S.dark||bothOut)?0:1;CH.A.st=S.a;CH.B.st=S.b;doing.A=S.doA;doing.B=S.doB;sleeping=S.dark?1:0;
   CH.A.out=S.pA==='out';CH.B.out=S.pB==='out';if(sleeping){pose(CH.A,{x:18,y:64,rot:1,flip:0});pose(CH.B,{x:30,y:64,rot:1,flip:0})}else{pose(CH.A,{x:SPX[S.pA]||22});pose(CH.B,{x:(SPX[S.pB]||106)+(S.pA===S.pB?8:0),flip:1})}
   if(!anim){LOG.innerHTML='';SHOWN=new Set();S.log.forEach(o=>{SHOWN.add(o.id);line(o,0)})}
-  else{const nw=S.log.filter(o=>!SHOWN.has(o.id));nw.forEach((o,i)=>{SHOWN.add(o.id);setTimeout(()=>line(o,1),i*1400)});if(nw.some(o=>/애정도 \+/.test(o.m)))['A','B'].forEach(k=>icon(CH[k],'♥'))}
+  else{const nw=S.log.filter(o=>!SHOWN.has(o.id));nw.forEach((o,i)=>{SHOWN.add(o.id);if(SPD>1||nw.length>6)line(o,0);else setTimeout(()=>line(o,1),i*1400)});if(nw.some(o=>/애정도 \+/.test(o.m)))['A','B'].forEach(k=>icon(CH[k],'♥'))}
   ui()}
  function ui(){let lv=1,need=150,base=0;while(H.aff>=base+need){base+=need;lv++;need=Math.round(need*1.6)}$('#afv').textContent=H.aff;$('#aflv').textContent='LV.'+lv;$('#afb').style.width=((H.aff-base)/need*100).toFixed(1)+'%';
   const st=$('#sts');st.innerHTML='';[['A','배부름','hun'],['B','배부름','hun'],['A','기분','mood'],['B','기분','mood']].forEach(([k,n,f])=>{const d=el('div');const l=el('span',null,NM(k)+' '+n);d.append(l);const b=el('div','bar3'),i=el('i');i.style.width=CH[k].st[f]+'%';i.style.background=C[k];b.append(i);d.append(b);st.append(d)});
   const nw=$('#hnow');nw.innerHTML='';['A','B'].forEach(k=>{const d=el('div'),i=el('i');i.style.background=C[k];d.append(i,el('b',null,NM(k)),el('span',null,doing[k]));nw.append(d)});
-  $('#hb4').textContent=H.out?'외출 중':H.light?'불 끄기':'불 켜기';$('#hb4').disabled=!!H.out;$('#hst').textContent=(nightAt(Date.now())?'NIGHT':'DAY')+' · '+khm(Date.now())+' · '+INFO.aName+' & '+INFO.bName+'의 집'}
- let busyT=0;function act(type){const now=Date.now();if(now<busyT)return;busyT=now+2500;ACTS.push({t:now,type});ACTS=ACTS.slice(-400);try{localStorage.setItem('house_acts2',JSON.stringify(ACTS))}catch(e){}apply(1)}
+  $('#hb4').textContent=H.out?'외출 중':H.light?'불 끄기':'불 켜기';$('#hb4').disabled=!!H.out;$('#hst').textContent=(nightAt(NOW())?'NIGHT':'DAY')+' · '+khm(NOW())+' · '+INFO.aName+' & '+INFO.bName+'의 집'}
+ let busyT=0;function act(type){const rn=Date.now();if(rn<busyT)return;busyT=rn+2500;const now=NOW();ACTS.push({t:now,type});ACTS=ACTS.slice(-400);try{localStorage.setItem('house_acts2',JSON.stringify(ACTS))}catch(e){}apply(1)}
  $('#hb1').onclick=()=>act('snack');$('#hb2').onclick=()=>{if(!sleeping)act('toy')};$('#hb3').onclick=()=>{if(!sleeping)act('song')};$('#hb4').onclick=()=>{if(!H.out)act(H.light?'off':'on')};
  let lastSlot=-1;apply(0);requestAnimationFrame(loop);
- setInterval(()=>{const k=Math.floor((Date.now()-EP)/SL);if(k!==lastSlot){const first=lastSlot<0;lastSlot=k;if(!first)apply(1)}else ui()},3000)}
+ setInterval(()=>{const k=Math.floor((NOW()-EP)/SL);if(k!==lastSlot){const first=lastSlot<0;lastSlot=k;if(!first)apply(1)}else ui()},3000);
+ const SPS=[1,60,600],ffb=$('#hff');let lastR=Date.now(),svT=0;ffb.onclick=()=>{SPD=SPS[(SPS.indexOf(SPD)+1)%SPS.length];ffb.classList.toggle('on',SPD>1);ffb.querySelector('span').textContent='X'+SPD;try{localStorage.setItem('house_ff',FF)}catch(e){}};
+ setInterval(()=>{const r=Date.now(),dt=r-lastR;lastR=r;if(SPD<=1)return;FF+=dt*(SPD-1);if(r-svT>2000){svT=r;try{localStorage.setItem('house_ff',FF)}catch(e){}}const k=Math.floor((NOW()-EP)/SL);if(k!==lastSlot){lastSlot=k;apply(1)}},250)}
 
 /* 다이어리 달력 */
 {const last=new Date(DIARY[0].d),y=last.getFullYear(),m=last.getMonth(),first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),now=new Date();
